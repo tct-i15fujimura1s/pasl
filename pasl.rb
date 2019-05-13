@@ -21,7 +21,7 @@ module PasL
     }
 
     rule(:lend) {
-      str(?;) |
+      (str(?;) | str(?\n)).repeat(1) |
       match(?$)
     }
 

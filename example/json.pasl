@@ -1,0 +1,21 @@
+spaces <- /\s/+
+
+comma <- spaces? "," spaces?
+digit <- [0-9]
+
+number <- ("-"? ("0" | [1-9] digit*) ("." digit+)? ([eE] [+-]? digit+)?)@number
+
+string <- "\"" (("\\" . | !"\"" .)*)@number "\""
+
+array <- "[" spaces? (value (comma value)*)?@array spaces? "]"
+
+object <- "{" spaces? (entry (comma entry)*)?@object spaces? "}"
+
+value <- string | number | object | array | \
+          "true"@true | "false"@false | "null"@null
+
+entry <- (string@key spaces? ":" spaces? value@val)@entry
+
+attribute <- (entry | value)@attribute
+
+top <- spaces? value spaces?
