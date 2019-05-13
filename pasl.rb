@@ -13,7 +13,7 @@ module PasL
     }
 
     rule(:name) {
-      (match('[_a-zA-Z]') >> match('[_0-9a-zA-Z?!]').repeat).as(:name)
+      (match('[_a-zA-Z]') >> match('[_0-9a-zA-Z]').repeat >> match('[!?]').maybe).as(:name)
     }
 
     rule(:expr) {
